@@ -1,5 +1,6 @@
-package com.qiandai.pay.common.dal.dto;
+package com.qiandai.pay.common.dal.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -11,8 +12,9 @@ import com.alibaba.fastjson.JSON;
 /**
  * Created by mashengli on 2016/7/7.
  */
-public class BaseDto {
-    private static final long serialVersionUID = -46538079178546068L;
+public class BaseEntity implements Serializable {
+    private static final long serialVersionUID = -7942104651034380131L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
