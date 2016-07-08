@@ -40,8 +40,7 @@ public class MoneyUtils {
         if (StringUtils.isBlank(money) || !StringUtils.isNumeric(money)) {
             throw new NumberFormatException("格式不支持");
         }
-        long lmoney = Long.valueOf(money);
-        return formatFen2Yuan(lmoney);
+        return formatFen2Yuan(Long.valueOf(money));
     }
 
     /**
