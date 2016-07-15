@@ -30,7 +30,4 @@ public interface BaseMapper<T extends Serializable, ID extends Serializable> {
 
     long countAll();
 
-    int batchInsert(Iterator<T> entities);
-
-    int batchUpdate(Iterator<T> entities);
 }
