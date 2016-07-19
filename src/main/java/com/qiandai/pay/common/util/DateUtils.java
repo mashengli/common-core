@@ -20,7 +20,7 @@ public class DateUtils {
     public static final String DATE_KEY_STR = "yyyyMMddHHmmss";
 
     /**
-     * 使用预设格式提取字符串日期
+     * 使用预设格式提取字符串日期，默认格式yyyy-MM-dd HH:mm:ss
      * @param strDate 日期字符串
      * @return
      */
@@ -72,7 +72,7 @@ public class DateUtils {
 
     /**
      * 获取系统当前时间
-     * @return
+     * @return yyyy-MM-dd HH:mm:ss
      */
     public static String getNowTime() {
         SimpleDateFormat df = new SimpleDateFormat(DATE_FULL_STR);
