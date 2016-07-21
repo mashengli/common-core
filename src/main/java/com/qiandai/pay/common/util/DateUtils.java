@@ -44,6 +44,27 @@ public class DateUtils {
     }
 
     /**
+     * 格式化日期返回执行格式的字符串
+     * @param date 日期
+     * @param pattern 格式
+     * @return
+     */
+    public static String format(Date date, String pattern) {
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        return sdf.format(date);
+    }
+
+    /**
+     * 按照默认格式格式化日期
+     * @param date 日期
+     * @return yyyy-MM-dd HH:mm:ss
+     */
+    public static String format(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FULL_STR);
+        return sdf.format(date);
+    }
+
+    /**
      * 两个日期类型时间比较
      * @param date
      * @return
