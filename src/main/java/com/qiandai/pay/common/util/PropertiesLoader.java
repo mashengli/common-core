@@ -15,20 +15,19 @@ public class PropertiesLoader {
     private static Properties prop;
 
     public static void load(String name) {
-        String fileName = name;
         prop = new Properties();
         InputStream in = null;
         try {
-            in = new FileInputStream(fileName);//
+            in = new FileInputStream(name);//
             InputStreamReader isr = new InputStreamReader(in, "UTF-8");
             prop.load(isr);
         } catch (Throwable t) {
             t.printStackTrace();
             try {
-                in = new FileInputStream(fileName);
+                in = new FileInputStream(name);
                 prop.load(in);
             } catch (Throwable t1) {
-                throw new RuntimeException("fail to load " + fileName);
+                throw new RuntimeException("fail to load " + name);
             }
         } finally {
             IOUtils.closeQuietly(in);

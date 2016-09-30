@@ -206,6 +206,45 @@ public class DateUtils {
     }
 
     /**
+     * 对日期进行秒数加减
+     * @param date 日期
+     * @param amount 秒数
+     * @return
+     */
+    public static Date addSecond(Date date, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.SECOND, amount);
+        return calendar.getTime();
+    }
+
+    /**
+     * 对日期进行分钟加减
+     * @param date 日期
+     * @param amount 分钟数
+     * @return
+     */
+    public static Date addMinute(Date date, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MINUTE, amount);
+        return calendar.getTime();
+    }
+
+    /**
+     * 对日期进行分钟加减
+     * @param date 日期
+     * @param amount 小时数
+     * @return
+     */
+    public static Date addHour(Date date, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, amount);
+        return calendar.getTime();
+    }
+
+    /**
      * 计算日期相差天数(不计时分秒)
      * @param startDate 开始日期
      * @param endDate 结束日期

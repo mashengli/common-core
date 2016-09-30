@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import com.qiandai.pay.common.dal.query.BaseQuery;
+import com.qiandai.pay.common.dal.query.MapperQuery;
 
 /**
  * Created by mashengli on 2016/7/6.
@@ -18,7 +18,7 @@ public interface BaseMapper<T extends Serializable, ID extends Serializable> {
 
     List<T> findAll();
 
-    List<T> findList(BaseQuery query);
+    List<T> findList(MapperQuery query);
 
     List<T> findByIds(Iterator<ID> ids);
 
@@ -26,7 +26,7 @@ public interface BaseMapper<T extends Serializable, ID extends Serializable> {
 
     void deleteByIds(List<ID> ids);
 
-    long countList(BaseQuery query);
+    long countList(MapperQuery query);
 
     long countAll();
 

@@ -48,8 +48,14 @@ public class MoneyUtils {
      * @param money
      * @return 字符串
      */
-    public static long formYuan2Fen(double money) {
-        return new Double(money * 100).longValue();
+    public static long formYuan2Fen(String money) {
+        Double dmoney = new Double(money);
+        return new Double(BigDecimalUtil.mul(dmoney, 100)).longValue();
+    }
+
+    public static String format2Decimal(double money) {
+        DecimalFormat format = new DecimalFormat("#0.00");
+        return format.format(money);
     }
 
 }

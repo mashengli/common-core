@@ -3,7 +3,7 @@ package com.qiandai.pay.common.service.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.qiandai.pay.common.dal.query.BaseQuery;
+import com.qiandai.pay.common.dal.query.MapperQuery;
 
 /**
  * @param <T>
@@ -11,7 +11,7 @@ import com.qiandai.pay.common.dal.query.BaseQuery;
 public final class ResultPage<T>{
 
     private List<T>     t;
-    private BaseQuery query;
+    private MapperQuery query;
     /**
      * total=0,尾页;total=1,后面有1页;total=2,后面有2页
      */
@@ -20,13 +20,13 @@ public final class ResultPage<T>{
     //总行数
     private Long count = 0L;
 
-    public ResultPage(List<T> list, BaseQuery query){
+    public ResultPage(List<T> list, MapperQuery query){
         this.t = new ArrayList<T>();
 
         if (query != null) {
             this.query = query;
         } else {
-            this.query = new BaseQuery();
+            this.query = new MapperQuery();
         }
         init(t, list);
     }

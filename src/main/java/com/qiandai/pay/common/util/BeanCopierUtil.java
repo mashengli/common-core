@@ -6,17 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.cglib.beans.BeanCopier;
 
 /**
  * Created by mashengli on 2016/7/18.
  */
 public class BeanCopierUtil {
-    private static Logger logger = LoggerFactory
-            .getLogger(BeanCopierUtil.class);
 
     /**
      * convert input object to an object of output type
@@ -32,13 +27,11 @@ public class BeanCopierUtil {
                 return null;
             }
             O k = outputType.newInstance();
-//			UFQBeanUtils.copyPropertiesIgnoreNullValue(inputObj, k);
 
             BeanCopier copier = BeanCopier.create(inputObj.getClass(), outputType, false);
             copier.copy(inputObj, k, null);
             return k;
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
             throw new RuntimeException(e);
         }
     }
@@ -75,7 +68,7 @@ public class BeanCopierUtil {
         if(inputMap == null){
             return null;
         }
-        Map<String, List<O>> map = new HashMap<String, List<O>>();
+        Map<String, List<O>> map = new HashMap<>();
         Set<Map.Entry<String, List<I>>> entrySet = inputMap.entrySet();
         for(Map.Entry<String, List<I>> entry: entrySet){
             map.put(entry.getKey(), convert(entry.getValue(), outputType));

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 用于查询
  * Created by mashengli on 2016/7/6.
  */
-public class BaseQuery implements Serializable {
+public class MapperQuery implements Serializable {
 
     private static final long serialVersionUID = -2196269466666530147L;
 
@@ -43,11 +43,15 @@ public class BaseQuery implements Serializable {
     }
 
     public void setPageNumber(Integer pageNumber) {
-        if (pageNumber != null && pageNumber.intValue() < 1) {
+        if (pageNumber != null && pageNumber < 1) {
             this.pageNumber = DEFAULT_PAGE_NUMBER;
         } else {
             this.pageNumber = pageNumber;
         }
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 
     public Integer getOffset() {
@@ -69,6 +73,10 @@ public class BaseQuery implements Serializable {
 
     public void setOrderOperator(String orderOperator) {
         this.orderOperator = orderOperator;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
     public Integer getSize() {
