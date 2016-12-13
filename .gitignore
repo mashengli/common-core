@@ -2,3 +2,7 @@
 target/
 .idea/
 .svn/
+.settings/
+.project
+.classpath
+*.log

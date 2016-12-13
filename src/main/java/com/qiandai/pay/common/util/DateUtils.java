@@ -264,4 +264,31 @@ public class DateUtils {
         }
     }
 
+    /**
+     * 根据所给日期获取指定月份的第一天时间，返回yyyy-MM-dd格式字符串
+     * @param month 月份时间
+     * @return
+     * @throws ParseException
+     */
+    public static String getFirstDayOfMonth(Date month) throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(month);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        return new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
+    }
+
+    /**
+     * 根据所给日期获取指定月份的最后一天时间，返回yyyy-MM-dd格式字符串
+     * @param month 月份时间
+     * @return
+     * @throws ParseException
+     */
+    public static String getLastDayOfMonth(Date month) throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(month);
+        calendar.add(Calendar.MONTH, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 0);
+        return new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
+    }
+
 }
