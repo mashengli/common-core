@@ -4,13 +4,12 @@ import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author mashengli
@@ -66,7 +65,7 @@ public class MapUtil {
      * @return
      */
     public static List<Map<String, Object>> objectsToMaps(List<Object> objList) throws Exception {
-        List<Map<String, Object>> list = Lists.newArrayList();
+        List<Map<String, Object>> list = new ArrayList<>();
         if (objList != null && objList.size() > 0) {
             Map<String, Object> map = null;
             for (Object obj : objList) {
@@ -87,7 +86,7 @@ public class MapUtil {
      */
     public static <T> List<T> mapsToObjects(List<Map<String, Object>> maps, Class<T> clazz) throws
             Exception {
-        List<T> list = Lists.newArrayList();
+        List<T> list = new ArrayList<>();
         if (maps != null && maps.size() > 0) {
             for (Map<String, Object> map : maps) {
                 list.add(mapToObject(map, clazz));
