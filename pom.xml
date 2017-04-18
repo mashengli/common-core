@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.qiandai.pay</groupId>
-    <artifactId>pay-common</artifactId>
+    <groupId>pers.mashengli.common</groupId>
+    <artifactId>common-core</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -52,7 +52,18 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.10</version>
+            <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.0.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -62,7 +73,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.7</version>
+            <version>1.2.29</version>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
@@ -98,15 +109,8 @@
     </dependencies>
 
     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <url>http://192.168.208.211:8081/nexus/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <url>http://192.168.208.211:8081/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
     </distributionManagement>
+
     <build>
         <resources>
             <resource>
