@@ -1,7 +1,6 @@
 package pers.mashengli.common.util;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -10,11 +9,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * @author mashengli
@@ -71,33 +79,41 @@ public class HttpClientUtil {
         return result;
     }
 
-    public static String doPost(String url, Map<String, Object> sParaTemp) {
-        HttpClient httpClient = new HttpClient();
-
-        PostMethod post = new PostMethod(url);
-        post.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-
-        List<String> keys = new ArrayList<String>(sParaTemp.keySet());
-        NameValuePair[] param = new NameValuePair[keys.size() + 1];
-        for (int i = 0; i < keys.size(); i++) {
-            String name = keys.get(i);
-            Object object = sParaTemp.get(name);
-            String value = "";
-            if (object != null) {
-                value = String.valueOf(sParaTemp.get(name));
-            }
-            //添加参数
-            param[i] = new NameValuePair(name, value);
-            post.setParameter(param[i].getName(), param[i].getValue());
-        }
-        String response = null;
+    public static String doPost(String url, Map<String, Object> sParaTemp, int timeout) {
+        CloseableHttpClient httpClient = null;
+        HttpPost httpPost = null;
+        String result = null;
         try {
-            httpClient.executeMethod(post);
-            response = post.getResponseBodyAsString();
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("url:" + url + "\r\nparams:" + JSONObject.toJSONString(sParaTemp));
+            httpClient = HttpClients.createDefault();
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setSocketTimeout(timeout)
+                    .setConnectTimeout(timeout)
+                    .setConnectionRequestTimeout(timeout)
+                    .build();
+            httpPost = new HttpPost(url);
+            httpPost.setConfig(requestConfig);
+            //设置参数
+            List<NameValuePair> list = new ArrayList<>();
+            for (Object o : sParaTemp.entrySet()) {
+                Map.Entry<String, Object> elem = (Map.Entry<String, Object>) o;
+                list.add(new BasicNameValuePair(elem.getKey(), String.valueOf(elem.getValue())));
+            }
+            if (list.size() > 0) {
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list, "UTF-8");
+                httpPost.setEntity(entity);
+            }
+            CloseableHttpResponse response = httpClient.execute(httpPost);
+            if (response != null) {
+                HttpEntity resEntity = response.getEntity();
+                if (resEntity != null) {
+                    result = EntityUtils.toString(resEntity, "UTF-8");
+                    System.out.println("response:" + result);
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        post.releaseConnection();
-        return response;
+        return result;
     }
 }
